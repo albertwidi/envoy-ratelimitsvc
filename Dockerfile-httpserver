@@ -1,0 +1,9 @@
+FROM golang:1.14.4 AS build
+WORKDIR /httpserver
+COPY main.go .
+
+RUN CGO_ENABLED=0 GOOS=linux go build -v -o httpserver main.go
+
+FROM alpine:3.11 AS final
+COPY --from=build /httpserver/httpserver /bin/httpserver
+ENTRYPOINT ["/bin/httpserver"]

@@ -1,0 +1,7 @@
+domain: httpserver
+descriptors:
+- key: x-test-ratelimit
+  value: limit
+  rate_limit:
+    unit: second
+    requests_per_unit: 3
